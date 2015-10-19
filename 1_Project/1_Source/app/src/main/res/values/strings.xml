@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Abbasies</string>
+
+
+    <string name="title_events">Eventos</string>
+    <string name="title_songs">Canciones</string>
+
+
+    <string name="hello_world">Hello world!</string>
+
+    <string name="action_settings">Settings</string>
+</resources>
