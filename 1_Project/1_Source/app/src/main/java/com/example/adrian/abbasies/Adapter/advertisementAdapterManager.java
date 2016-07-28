@@ -1,22 +1,24 @@
 package com.example.adrian.abbasies.Adapter;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.adrian.abbasies.Objects.Advertisement;
 import com.example.adrian.abbasies.Objects.Evento;
 import com.example.adrian.abbasies.R;
 import com.example.adrian.abbasies.Repository.repositoryController;
 
-public class eventAdapterManager {
+/**
+ * Created by Adrian on 24/04/2016.
+ */
+public class advertisementAdapterManager {
     private repositoryController rc;
     private Context cntx;
 
-    public eventAdapterManager(Context cntx){
+    public advertisementAdapterManager(Context cntx){
         this.cntx = cntx;
         this.rc = new repositoryController(cntx);
     }
@@ -25,8 +27,8 @@ public class eventAdapterManager {
         return rc.getCount();
     }
 
-    public Evento getItem(int position) {
-        return rc.getEvent(position);
+    public Advertisement getItem(int position) {
+        return null; //rc.getA(position);
     }
 
     public String getItemId(int position) {
@@ -34,7 +36,7 @@ public class eventAdapterManager {
         return rc.getEvent(position).getObjectId();
     }
 
-    public View getView(View convertView, Evento event){
+    public View getView(View convertView, Advertisement advertisement){
         eventHolder holder;
         if(convertView == null) {
 
@@ -46,27 +48,20 @@ public class eventAdapterManager {
             holder.month = (TextView)convertView.findViewById(R.id.month_listevent);
             holder.tittle = (TextView) convertView.findViewById(R.id.title_listevent);
             convertView.setTag(holder);
-            Log.v("event", convertView.toString());
+            Log.v("advertisement", convertView.toString());
         } else {
-            Log.v("event", "else");
+            Log.v("advertisement", "else");
             holder = (eventHolder) convertView.getTag();
         }
-        Log.v("event", holder.toString());
-        holder.hour.setText(event.getEventDate().getHours()+"");
-        holder.day.setText(event.getEventDate().getDay()+"");
-        holder.month.setText(event.getEventDate().getMonth()+"");
-        holder.tittle.setText(event.getEventTitle()+"");
+        Log.v("advertisement", holder.toString());
+//        holder.hour.setText(advertisement.getEventDate().getHours()+"");
+//        holder.day.setText(advertisement.getEventDate().getDay()+"");
+//        holder.month.setText(advertisement.getEventDate().getMonth()+"");
+//        holder.tittle.setText(advertisement.getEventTitle()+"");
         return convertView;
     }
 
     public void updateList(){
 
     }
-}
-
-class eventHolder{
-    TextView day;
-    TextView month;
-    TextView hour;
-    TextView tittle;
 }

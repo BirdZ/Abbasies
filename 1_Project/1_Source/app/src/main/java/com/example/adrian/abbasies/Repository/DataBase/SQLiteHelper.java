@@ -7,9 +7,11 @@ package com.example.adrian.abbasies.Repository.DataBase;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 
 public class SQLiteHelper extends SQLiteOpenHelper {
@@ -62,15 +64,16 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         //Se elimina la versión anterior de la tabla
-        db.execSQL("DROP TABLE IF EXISTS"+EVENTS_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS" + EVENTS_TABLE_NAME);
         //Se crea la nueva versión de la tabla
         db.execSQL(sqlEventos);
     }
 
-    public boolean addEvent(String objectId, long uptadedAt, long createdAt, double eventLocationLat, double eventLocationLong, String eventAdress, int eventType, long eventDate, String eventDescription, String eventTitle) {
+    public boolean saveEvent(String objectId, long uptadedAt, long createdAt, double eventLocationLat, double eventLocationLong, String eventAdress, int eventType, long eventDate, String eventDescription, String eventTitle) {
         //Obtenemos el escritor de la base de datos
         SQLiteDatabase db = getWritableDatabase();
         boolean resultado = false;
+        Log.v("database", objectId + " " + uptadedAt + " " + createdAt + " " + eventLocationLat + " " + eventLocationLong + " "+ eventAdress + " " + eventType + " " + eventDate + " " + eventDescription + " " + eventTitle);
 
         if (db != null) {
             //Almacenamos los valores
@@ -98,6 +101,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                         resultado = false;
                 } else
                     resultado = true;
+            }  catch (SQLiteConstraintException sqlce){
+                resultado = false;
+                Log.v("databaseerror", "error");
             } catch (Exception e) {
                 resultado = false;
             }
@@ -128,5 +134,21 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             c.moveToFirst();
         }
         return c;
+    }
+
+    public long getLastUpdate() throws Exception {
+        SQLiteDatabase db = getReadableDatabase();
+        String[] valores_recuperar = { ATTR_UPDATE_AT };
+        Cursor c = db.query(EVENTS_TABLE_NAME, valores_recuperar, null, null, null,null, ATTR_UPDATE_AT + "DESC", "1");
+        if (c != null) {
+            c.moveToFirst();
+        } else {
+            throw new Exception();
+        }
+        return c.getLong(COLUMN_UPDATE_AT);
+    }
+
+    public boolean deleteEvent(String objectId){
+        return false;
     }
 }

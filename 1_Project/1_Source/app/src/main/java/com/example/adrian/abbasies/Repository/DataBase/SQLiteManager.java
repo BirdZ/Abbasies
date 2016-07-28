@@ -26,7 +26,7 @@ public class SQLiteManager  {
         long date = evento.getEventDate().getTime();
         long createAt = evento.getCreatedAt().getTime();
         long updateAt = evento.getUptadedAt().getTime();
-        return sqlh.addEvent(evento.getObjectId(), updateAt, createAt, latitude, longitude, evento.getEventAdress(), evento.getEventType(), date, evento.getEventDescription(), evento.getEventTitle());
+        return sqlh.saveEvent(evento.getObjectId(), updateAt, createAt, latitude, longitude, evento.getEventAdress(), evento.getEventType(), date, evento.getEventDescription(), evento.getEventTitle());
     }
 
     public Evento getEvent(String objectId){
@@ -42,5 +42,23 @@ public class SQLiteManager  {
         updateAt.setTime(c.getLong(SQLiteHelper.COLUMN_UPDATE_AT));
         Evento event = new Evento(c.getString(SQLiteHelper.COLUMN_OBJECT_ID), updateAt, createAt, location, c.getString(SQLiteHelper.COLUMN_EVENT_ADRESS), c.getInt(SQLiteHelper.COLUMN_EVENT_TYPE), date, c.getString(SQLiteHelper.COLUMN_EVENT_DESCRIPTION), c.getString(SQLiteHelper.COLUMN_EVENT_TITLE));
         return event;
+    }
+
+    public Cursor getAll(){
+        return sqlh.getEvents();
+    }
+
+    public Date getLastUpdate(){
+        Date lastUpdate = new Date();
+        try{
+            lastUpdate.setTime(sqlh.getLastUpdate());
+        } catch(Exception e){
+            return new Date();
+        }
+        return lastUpdate;
+    }
+
+    public boolean deleteEvent(Evento event){
+        return sqlh.deleteEvent(event.getObjectId());
     }
 }

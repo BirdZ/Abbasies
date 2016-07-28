@@ -1,27 +1,39 @@
 package com.example.adrian.abbasies.Repository;
 
+import android.content.Context;
+
 import com.example.adrian.abbasies.Objects.Evento;
 
-/**
- * Created by Adrian on 31/08/2015.
- */
 public class repositoryController {
 
     private repositoryManager rm;
 
-    public repositoryController(){
-        this.rm = new repositoryManager();
+    public repositoryController(Context cntx){
+        this.rm = new repositoryManager(cntx);
     }
 
-    public Evento getEvento(String código){
-        return rm.
+    public Evento getEvent(int position){
+        return rm.getEvent(position);
     }
 
-    public void getNewEvents(){
+
+    public void loadNewEvents(){
+        rm.loadNewEvents();
+    }
+
+    public void loadOldEvents(){
+        rm.loadOldEvents();
+    }
+
+    public void updateDB(){
 
     }
 
-    public void getOldEvents(){
-
+    public void updateEvent(String code){
+        rm.updateEvent(code);
     }
+    public int getCount(){
+        return rm.count();
+    }
+
 }

@@ -1,35 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="fill_parent">
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:weightSum="1">
+        android:layout_width="100dp"
+        android:layout_height="fill_parent">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="93dp"
+            android:layout_height="75dp"
             android:text="New Text"
-            android:id="@+id/day_listevent"
-            android:layout_weight="0.08" />
+            android:id="@+id/day_listevent" />
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="75dp"
             android:text="New Text"
             android:id="@+id/month_listevent" />
     </LinearLayout>
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="310dp"
+        android:layout_width="280dp"
         android:layout_height="fill_parent">
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="75dp"
             android:text="New Text"
             android:id="@+id/title_listevent" />
 
@@ -38,7 +36,7 @@
             android:layout_height="wrap_content"
             android:text="New Text"
             android:id="@+id/hour_listevent" />
-        </LinearLayout>
+    </LinearLayout>
 
 
 </LinearLayout>

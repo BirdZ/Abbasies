@@ -4,11 +4,13 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.adrian.abbasies.Adapter.SectionsPagerAdapter;
 import com.example.adrian.abbasies.R;
+import com.firebase.client.Firebase;
 import com.parse.Parse;
 
 
@@ -35,9 +37,9 @@ public class mainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_list);
         // Enable Local Datastore.
+        Firebase.setAndroidContext(this);
         Parse.enableLocalDatastore(this);
         Parse.initialize(this, "qQOf8vaLIEKASXAPqJr17BqZp9AQqPiuwkQ7oX8I", "ejI8qfCMy67VKHdCWb7wFfFckIiwYs3xKkbYK5ln");
-
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
